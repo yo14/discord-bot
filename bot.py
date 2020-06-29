@@ -1,4 +1,5 @@
 import discord
+import random
 from discord.ext import commands
 
 client = commands.Bot(command_prefix='.')
@@ -7,13 +8,36 @@ client = commands.Bot(command_prefix='.')
 async def on_ready():
     print('Bot is ready')
 
-@client.event
-async def on_member_join(member):
-    print(f'{member} has joined a server.')
+# when ping command run. bot will send 'pong'
+@client.command()
+async def ping(ctx):
+    await ctx.send(f'pong! {round(client.latency * 1000)}ms')
 
-@client.event
-async def on_member_remove(member):
-    print(f'{member} has left a server.')
+# using aliases, so user easy to use this command
+@client.command(aliases=['8ball','test'])
+async def _8ball(ctx, *, question):
+    responses = [ 'It is certain.',
+                  'It is decidedly so.',
+                  'Without a doubt.',
+                  'Yes - definitely.',
+                  'You may rely on it.',
+                  'As I see it, yes.',
+                  'Most likely.',
+                  'Outlook good.',
+                  'Yes.',
+                  'Signs point to yes.',
+                  'Reply hazy, try again.',
+                  'Ask again later.',
+                  'Better not tell you now.',
+                  'Cannot predict now.',
+                  'Concentrate and ask again.',
+                  "Don't count on it.",
+                  'My reply is no.',
+                  'My sources say no.',
+                  'Outlook not so good.',
+                  'Very doubtful.']
+    await ctx.send(f'Question: {question}\nAnwer: {random.choice(responses)}')
 
 client.run('your_secret_token_put_here')
+
 
