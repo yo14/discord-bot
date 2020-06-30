@@ -9,10 +9,13 @@ async def on_ready():
     print('Bot is ready')
 
 @client.command()
-async def clear(ctx, amount=5):
-    await ctx.channel.purge(limit=amount)
+async def kick(ctx, member : discord.Member, *, reason=None):
+    await member.kick(reason=reason)
 
-client.run('your_secret_token_put_here')
+@client.command()
+async def ban(ctx, member: discord.Member, *, reason=None):
+    await member.ban(reason=reason)
 
+# client.run('your_secret_token_put_here')
 
 
