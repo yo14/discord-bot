@@ -6,3 +6,5 @@
 - commands
 - clear
 - kick/ban (all user can do it)
+- unban
+
